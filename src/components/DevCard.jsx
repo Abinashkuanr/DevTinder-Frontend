@@ -13,17 +13,16 @@ const LANG_DOTS = {
 };
 
 function dotColor(skill) {
-  return LANG_DOTS[skill?.toLowerCase?.()] || "#6366F1";
+  return LANG_DOTS[skill?.toLowerCase?.()] || "#7C5CFC";
 }
 
 export default function DevCard({ user, onIgnore, onInterested, busy, exiting }) {
   const { firstName, lastName, age, gender, about, skills, photoUrl } = user || {};
-  const handle = (firstName || "dev").toLowerCase().replace(/\s+/g, "-");
 
   return (
     <div
       className={
-        "panel w-full max-w-sm overflow-hidden " +
+        "relative w-full max-w-sm " +
         (exiting === "approve"
           ? "animate-swipe-approve"
           : exiting === "reject"
@@ -31,64 +30,53 @@ export default function DevCard({ user, onIgnore, onInterested, busy, exiting })
           : "animate-card-in")
       }
     >
-      {/* PR header bar */}
-      <div className="flex items-center gap-2 border-b border-line bg-titlebar px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-rose/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-amber/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-emerald/80" />
-        <span className="ml-2 truncate font-mono text-xs text-white/60">
-          pull-request · devtinder/{handle}
-        </span>
-      </div>
+      <div className="panel relative aspect-[3/4] w-full overflow-hidden">
+        <img
+          src={photoUrl}
+          alt={firstName}
+          referrerPolicy="no-referrer"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-scrim" />
 
-      <div className="p-5">
-        <div className="flex items-start gap-4">
-          <img
-            src={photoUrl}
-            alt={firstName}
-            referrerPolicy="no-referrer"
-            className="h-16 w-16 shrink-0 rounded-xl border border-line object-cover"
-          />
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
-              <span className="skill-chip !border-emerald/30 !bg-emerald-soft !text-emerald">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald" />
-                open
-              </span>
-              {age ? <span className="font-mono text-xs text-muted">age {age}</span> : null}
-              {gender ? <span className="font-mono text-xs text-muted">· {gender}</span> : null}
-            </div>
-            <h3 className="mt-1.5 truncate font-display text-xl font-semibold text-ink">
-              {firstName} {lastName}
-            </h3>
-          </div>
+        <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-emerald backdrop-blur">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald" />
+          Open to connect
         </div>
 
-        <p className="mt-4 line-clamp-3 text-[14.5px] leading-relaxed text-ink/80">
-          {about || "This developer hasn't written a bio yet."}
-        </p>
+        <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+          <h3 className="flex items-baseline gap-2 font-display text-2xl font-extrabold drop-shadow-sm">
+            {firstName} {lastName}
+            {age ? <span className="font-display text-xl font-semibold text-white/85">{age}</span> : null}
+          </h3>
+          {gender ? <p className="mt-0.5 text-sm text-white/75">{gender}</p> : null}
 
-        {!!skills?.length && (
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {skills.slice(0, 6).map((s) => (
-              <span key={s} className="skill-chip">
+          <p className="mt-2.5 line-clamp-2 text-[14.5px] leading-relaxed text-white/90">
+            {about || "This developer hasn't written a bio yet."}
+          </p>
+
+          {!!skills?.length && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {skills.slice(0, 6).map((s) => (
                 <span
-                  className="h-1.5 w-1.5 rounded-full"
-                  style={{ background: dotColor(s) }}
-                />
-                {s}
-              </span>
-            ))}
-          </div>
-        )}
+                  key={s}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-mono text-white backdrop-blur"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: dotColor(s) }} />
+                  {s}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 border-t border-line bg-paper/60 p-4">
-        <button className="btn-reject" onClick={onIgnore} disabled={busy}>
-          <span aria-hidden>✕</span> Request changes
+      <div className="mt-5 flex items-center justify-center gap-6">
+        <button className="fab-reject" onClick={onIgnore} disabled={busy} aria-label="Pass">
+          ✕
         </button>
-        <button className="btn-approve" onClick={onInterested} disabled={busy}>
-          <span aria-hidden>✓</span> Approve
+        <button className="fab-approve" onClick={onInterested} disabled={busy} aria-label="Interested">
+          ♥
         </button>
       </div>
     </div>

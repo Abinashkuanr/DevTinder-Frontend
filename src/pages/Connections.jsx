@@ -20,12 +20,11 @@ export default function Connections() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
-      <p className="font-mono text-xs text-indigo">$ devtinder connections --merged</p>
-      <h1 className="mt-1 font-display text-3xl font-semibold text-ink">Your connections</h1>
+      <h1 className="font-display text-3xl font-extrabold text-ink">Your matches</h1>
       <p className="mt-1.5 text-sm text-muted">Developers you've matched with.</p>
 
       {error && (
-        <div className="mt-5 rounded-lg border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
+        <div className="mt-5 rounded-2xl border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
           {error}
         </div>
       )}
@@ -47,9 +46,9 @@ export default function Connections() {
                   src={c.photoUrl}
                   alt={c.firstName}
                   referrerPolicy="no-referrer"
-                  className="h-14 w-14 rounded-full border border-line object-cover"
+                  className="h-14 w-14 rounded-full border-2 border-flame-soft object-cover"
                 />
-                <h4 className="mt-3 font-display font-semibold text-ink">
+                <h4 className="mt-3 font-display font-bold text-ink">
                   {c.firstName} {c.lastName}
                 </h4>
                 <p className="mt-1 line-clamp-2 text-sm text-muted">

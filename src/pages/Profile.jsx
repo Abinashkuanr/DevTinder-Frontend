@@ -88,8 +88,7 @@ export default function Profile() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
-      <p className="font-mono text-xs text-indigo">$ devtinder profile --self</p>
-      <h1 className="mt-1 font-display text-3xl font-semibold text-ink">Your profile</h1>
+      <h1 className="font-display text-3xl font-extrabold text-ink">Your profile</h1>
       <p className="mt-1.5 text-sm text-muted">This is exactly what other developers see in their feed.</p>
 
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,360px)_1fr]">
@@ -99,25 +98,25 @@ export default function Profile() {
         </div>
 
         {/* Editor panel */}
-        <div className="panel p-0">
+        <div className="panel overflow-hidden p-0">
           <div className="flex border-b border-line">
             <button
               onClick={() => setTab("edit")}
               className={
-                "flex-1 border-b-2 px-4 py-3 font-mono text-xs transition " +
-                (tab === "edit" ? "border-indigo text-ink" : "border-transparent text-muted hover:text-ink")
+                "flex-1 border-b-2 px-4 py-3 text-sm font-semibold transition " +
+                (tab === "edit" ? "border-flame text-ink" : "border-transparent text-muted hover:text-ink")
               }
             >
-              edit-profile.jsx
+              Edit profile
             </button>
             <button
               onClick={() => setTab("password")}
               className={
-                "flex-1 border-b-2 px-4 py-3 font-mono text-xs transition " +
-                (tab === "password" ? "border-indigo text-ink" : "border-transparent text-muted hover:text-ink")
+                "flex-1 border-b-2 px-4 py-3 text-sm font-semibold transition " +
+                (tab === "password" ? "border-flame text-ink" : "border-transparent text-muted hover:text-ink")
               }
             >
-              change-password.jsx
+              Change password
             </button>
           </div>
 
@@ -125,12 +124,12 @@ export default function Profile() {
             {tab === "edit" ? (
               <form onSubmit={handleSaveProfile} className="space-y-4">
                 {editError && (
-                  <div className="rounded-lg border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
+                  <div className="rounded-2xl border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
                     {editError}
                   </div>
                 )}
                 {editSuccess && (
-                  <div className="rounded-lg border border-emerald/30 bg-emerald-soft px-3.5 py-2.5 text-sm text-emerald">
+                  <div className="rounded-2xl border border-emerald/30 bg-emerald-soft px-3.5 py-2.5 text-sm text-emerald">
                     {editSuccess}
                   </div>
                 )}
@@ -204,12 +203,12 @@ export default function Profile() {
             ) : (
               <form onSubmit={handleChangePassword} className="max-w-sm space-y-4">
                 {pwError && (
-                  <div className="rounded-lg border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
+                  <div className="rounded-2xl border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
                     {pwError}
                   </div>
                 )}
                 {pwSuccess && (
-                  <div className="rounded-lg border border-emerald/30 bg-emerald-soft px-3.5 py-2.5 text-sm text-emerald">
+                  <div className="rounded-2xl border border-emerald/30 bg-emerald-soft px-3.5 py-2.5 text-sm text-emerald">
                     {pwSuccess}
                   </div>
                 )}

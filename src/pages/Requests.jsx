@@ -38,12 +38,11 @@ export default function Requests() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
-      <p className="font-mono text-xs text-indigo">$ devtinder requests --incoming</p>
-      <h1 className="mt-1 font-display text-3xl font-semibold text-ink">Open requests</h1>
+      <h1 className="font-display text-3xl font-extrabold text-ink">Open requests</h1>
       <p className="mt-1.5 text-sm text-muted">Developers who want to connect with you.</p>
 
       {error && (
-        <div className="mt-5 rounded-lg border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
+        <div className="mt-5 rounded-2xl border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
           {error}
         </div>
       )}
@@ -67,10 +66,10 @@ export default function Requests() {
                     src={from?.photoUrl}
                     alt={from?.firstName}
                     referrerPolicy="no-referrer"
-                    className="h-12 w-12 shrink-0 rounded-full border border-line object-cover"
+                    className="h-12 w-12 shrink-0 rounded-full border-2 border-flame-soft object-cover"
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-display font-semibold text-ink">
+                    <p className="truncate font-display font-bold text-ink">
                       {from?.firstName} {from?.lastName}
                     </p>
                     <p className="truncate text-sm text-muted">
@@ -79,7 +78,7 @@ export default function Requests() {
                   </div>
                   <div className="flex shrink-0 gap-2">
                     <button
-                      className="rounded-lg border border-line bg-white p-2 text-ink transition hover:border-rose hover:text-rose disabled:opacity-50"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-white text-ink transition hover:border-rose hover:text-rose disabled:opacity-50"
                       title="Reject"
                       disabled={busyId === r._id}
                       onClick={() => review("rejected", r._id)}
@@ -87,12 +86,12 @@ export default function Requests() {
                       ✕
                     </button>
                     <button
-                      className="rounded-lg bg-emerald p-2 text-white transition hover:brightness-105 disabled:opacity-50"
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-flame text-white transition hover:brightness-105 disabled:opacity-50"
                       title="Accept"
                       disabled={busyId === r._id}
                       onClick={() => review("accepted", r._id)}
                     >
-                      ✓
+                      ♥
                     </button>
                   </div>
                 </li>

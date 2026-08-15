@@ -75,31 +75,30 @@ export default function Feed() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
-      <p className="font-mono text-xs text-indigo">$ devtinder feed --sort=match</p>
-      <h1 className="mt-1 font-display text-3xl font-semibold text-ink">Find your next collaborator</h1>
+      <h1 className="font-display text-3xl font-extrabold text-ink">Find your next collaborator</h1>
       <p className="mt-1.5 max-w-lg text-sm text-muted">
-        Request changes on profiles that aren't a fit, or approve to open a connection. Use{" "}
-        <kbd className="rounded border border-line bg-white px-1.5 py-0.5 font-mono text-xs">←</kbd> /{" "}
-        <kbd className="rounded border border-line bg-white px-1.5 py-0.5 font-mono text-xs">→</kbd> too.
+        Pass on profiles that aren't a fit, or show interest to open a connection. Use{" "}
+        <kbd className="rounded-md border border-line bg-white px-1.5 py-0.5 font-mono text-xs">←</kbd> /{" "}
+        <kbd className="rounded-md border border-line bg-white px-1.5 py-0.5 font-mono text-xs">→</kbd> too.
       </p>
 
       {error && (
-        <div className="mx-auto mt-6 max-w-sm rounded-lg border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
+        <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-rose/30 bg-rose-soft px-3.5 py-2.5 text-sm text-rose">
           {error}
         </div>
       )}
 
-      <div className="relative mx-auto mt-8 flex min-h-[520px] max-w-sm items-start justify-center">
+      <div className="relative mx-auto mt-8 flex min-h-[560px] max-w-sm items-start justify-center">
         {loading && queue.length === 0 ? (
-          <Loader label="fetching feed" />
+          <Loader label="Fetching your feed" />
         ) : current ? (
           <div className="relative w-full">
             {/* Depth cards peeking behind the active one */}
             {queue[2] && (
-              <div className="absolute inset-x-4 top-4 -z-10 h-full scale-[0.94] rounded-2xl border border-line bg-white/70" />
+              <div className="absolute inset-x-4 top-4 -z-10 aspect-[3/4] scale-[0.94] rounded-[28px] border border-line bg-white/70" />
             )}
             {queue[1] && (
-              <div className="absolute inset-x-2 top-2 -z-10 h-full scale-[0.97] rounded-2xl border border-line bg-white/90" />
+              <div className="absolute inset-x-2 top-2 -z-10 aspect-[3/4] scale-[0.97] rounded-[28px] border border-line bg-white/90" />
             )}
             <DevCard
               key={current._id}
@@ -109,13 +108,13 @@ export default function Feed() {
               onIgnore={() => act("ignored")}
               onInterested={() => act("interested")}
             />
-            <p className="mt-4 text-center font-mono text-xs text-muted">
+            <p className="mt-4 text-center text-xs font-medium text-muted">
               {queue.length} profile{queue.length === 1 ? "" : "s"} queued
             </p>
           </div>
         ) : (
           <EmptyState
-            title="Feed's empty"
+            title="You're all caught up"
             body="You've been through everyone available right now. Check back later, or review requests you've already sent."
           />
         )}
